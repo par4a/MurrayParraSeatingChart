@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Seating Chart</title>
+  <style>
+    body{
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin: 0; padding: 0; min-height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    header{
+      padding: 1rem;
+      background: #0b66ff;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    main{ flex: 1; padding: 1rem; }
+    .controls{ margin-bottom: 1rem; }
+    .btn{
+      display: inline-block;
+      padding: .5rem .8rem;
+      border-radius: 8px;
+      background: white;
+      color: #0b66ff;
+      text-decoration: none;
+      font-weight: 600;
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .embed-wrap{
+      width: 100%;
+      height: calc(100vh - 140px);
+      border: 1px solid #e6e6e6;
+    }
+    .fallback{
+      padding: 1rem;
+      background: #fff6e6;
+      border-radius: 6px;
+      margin-top: .5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="font-size:1.1rem; margin:0;">Seating chart viewer</h1>
+  </header>
+
+  <main>
+    <div class="controls">
+      <!-- Opens the resource in a new tab/window -->
+      <a class="btn" href="seating chart.html" target="_blank" rel="noopener noreferrer">
+        Open seating chart in a new tab
+      </a>
+
+      <!-- Download link in case the browser can't open it -->
+      <a class="btn" href="seating chart.html" download style="margin-left: .5rem;">
+        Download seating chart
+      </a>
+    </div>
+
+    <!-- Embed the file. Uses <iframe> so most browsers will show PDFs inline.
+         The src points to the filename you provided exactly ("seating chart.html"). -->
+    <div class="embed-wrap" role="region" aria-label="Seating chart preview">
+      <iframe
+        src="seating chart.html"
+        title="Seating chart"
+        width="100%"
+        height="100%"
+        style="border:0;"
+      >
+        <!-- Fallback message for very old browsers -->
+        <p class="fallback">
+          Your browser doesn't support inline PDF viewing. Use the links above to
+          open or download the seating chart.
+        </p>
+      </iframe>
+    </div>
+  </main>
+
+  <script>
+    // Optional: try to automatically open the file in a new tab on load.
+    // Comment out if you don't want automatic open behavior.
+    (function(){
+      try {
+        // Only auto-open once per session to avoid annoying popups.
+        if (!sessionStorage.getItem('seatingChartOpened')) {
+          sessionStorage.setItem('seatingChartOpened', '1');
+          window.open('seating chart.html', '_blank', 'noopener');
+        }
+      } catch(e){ /* ignore blocked popups */ }
+    })();
+  </script>
+</body>
+</html>
